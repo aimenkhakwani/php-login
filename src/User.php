@@ -60,6 +60,8 @@
             }
             if ($unique == true) {
                 $GLOBALS['DB']->exec("INSERT INTO users (username, password) VALUES ('{$this->getUsername()}', '{$this->getPassword()}');");
+                $this->id = $GLOBALS['DB']->lastInsertId();
+                return true;
             }
         }
 
@@ -70,7 +72,7 @@
             foreach($returned_users as $user) {
                 $username = $user['username'];
                 $password = $user['password'];
-                $id - $user['id'];
+                $id = $user['id'];
                 $new_user = new User($username, $password, $id);
                 array_push($users, $new_user);
             }
