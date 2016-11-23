@@ -7,7 +7,7 @@
     <div class="well">
         <h1>PHP User Authentication</h1>
         {% if current_user %}
-        <a href="/log_out" class="pull-right">Log Out</a>
+        <p class="pull-right">Hi, {{current_user.getUsername}}! <a href="/log_out">Log Out</a></p>
         {% endif %}
     </div>
     <div class="container">

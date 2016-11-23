@@ -176,7 +176,7 @@
             $new_user2->delete();
             $result = User::getAll();
 
-            $this->assertEquals([$new_user, $new_user2], $result);
+            $this->assertEquals([$new_user], $result);
         }
     }
 ?>
