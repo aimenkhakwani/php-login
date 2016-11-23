@@ -1,6 +1,6 @@
 # PHP User Authentication
 
-#### November 23, 2016_
+#### November 23, 2016
 
 #### By _**Aimen Khakwani**_
 
