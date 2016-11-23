@@ -26,7 +26,7 @@
     Request::enableHttpMethodParameterOverride();
 
     $app->get("/", function() use ($app) {
-        return $app['twig']->render('index.html.twig', array('current_user' => $_SESSION['current_user']));
+        return $app['twig']->render('index.html.twig', array('current_user' => $_SESSION['current_user'], 'alert' => null));
     });
 
     $app->post("/sign_up", function() use ($app) {
@@ -38,7 +38,7 @@
             $_SESSION['current_user'] = $new_user;
             return $app['twig']->render('login.html.twig', array('current_user' => $_SESSION['current_user'], 'user' => $new_user));
         } else {
-            return $app->redirect("/");
+            return $app['twig']->render('index.html.twig', array('current_user' => $_SESSION['current_user'], 'alert' => 'fail'));
         }
     });
 
