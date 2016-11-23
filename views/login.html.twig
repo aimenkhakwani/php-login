@@ -6,10 +6,22 @@
 <body>
     <div class="well">
         <h1>PHP User Authentication</h1>
-        <a href="/">Home</a>
+        <div class="col-md-2 col-md-offset-5">
+            <a href="/">Home</a>
+            &nbsp;&nbsp;
+            {% if current_user %}
+            <a href="/log_out">Log Out</a>
+            {% endif %}
+        </div>
     </div>
     <div class="container">
-        <div class="alert alert-success" role="alert">Welcome, {{user.getUsername}}. You have successfully signed in!</div>
+        {% if alert == 'sign-up' %}
+            <div class="alert alert-success" role="alert"><strong>Welcome</strong>, {{current_user.getUsername}}. You have successfully signed in!</div>
+        {% endif %}
+
+        {% if alert == 'log-in' %}
+            <div class="alert alert-success" role="alert"><strong>Welcome {{current_user.getUsername}}</strong>. You have successfully logged in!</div>
+        {% endif %}
     </div>
 </body>
 </html>

@@ -36,10 +36,26 @@
         $valid = $new_user->save();
         if ($valid == true) {
             $_SESSION['current_user'] = $new_user;
-            return $app['twig']->render('login.html.twig', array('current_user' => $_SESSION['current_user'], 'user' => $new_user));
+            return $app['twig']->render('login.html.twig', array('current_user' => $_SESSION['current_user'], 'alert' => 'sign-up'));
         } else {
-            return $app['twig']->render('index.html.twig', array('current_user' => $_SESSION['current_user'], 'alert' => 'fail'));
+            return $app['twig']->render('index.html.twig', array('current_user' => $_SESSION['current_user'], 'alert' => 'sign-up-fail'));
         }
+    });
+
+    $app->post("/log_in", function() use ($app) {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $valid = User::verifyLogin($username, $password);
+        if ($valid == true) {
+            return $app['twig']->render('login.html.twig', array('current_user' => $_SESSION['current_user'], 'alert' => 'log-in'));
+        } else {
+            return $app['twig']->render('index.html.twig', array('current_user' => $_SESSION['current_user'], 'alert' => 'log-in-fail'));
+        }
+    });
+
+    $app->get("log_out", function() use ($app) {
+        $_SESSION['current_user'] = null;
+        return $app['twig']->render('index.html.twig', array('current_user' => $_SESSION['current_user'], 'alert' => 'log-out'));
     });
 
     return $app;
